@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+{% block content %}
+    {% for post in news_articles %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="{{ post.url }}" target="_blank">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            {% if post.sentiment == "Negative" %}
+              <h2><a class="emoji" href="{{ post.url }}" target="_blank"><b>☹</b></a></h2>
+            {% endif %}
+            {% if post.sentiment == "Positive" %}
+              <h2><a class="emoji" href="{{ post.url }}" target="_blank"><b>😀</b></a></h2>
+            {% endif %}
+            {% if post.sentiment == "Neutral" %}
+              <h2><a class="emoji" href="{{ post.url }}" target="_blank"><b>😐</b></a></h2>
+            {% endif %}
+            <h2><a class="article-title" href="{{ post.url }}" target="_blank">{{ post.title }}</a></h2>
+              <a href="{{ post.url }}" target="_blank">
+                  <img src="{{post.url_image}}" alt="Image_Loading" class="news_image">
+              </a>
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+          {% if post.article_number %1 == 0 %}
+                <div class="ad_section">
+<!--                    <h1>{{ post.ad_tagline }}</h1>-->
+                    <h2><a href="{{ post.ad_landing_url }}" target="_blank">{{ post.ad_tagline }}</a></h2>
+<!--                    <a href="{{ post.ad_landing_url }}" target="_blank">-->
+<!--                        <img src="{{post.ad_Image_url}}" alt="Image_Loading" class="ad_poster">-->
+<!--                    </a>-->
+                    <a href="{{ post.ad_landing_url }}" target="_blank"><img src="{{post.ad_Image_url}}" alt="Image_Loading" type='image' class="ad_poster"></a>
+                </div>
+          {% endif %}
+        </article>
+    {% endfor %}
+{% endblock content %}
